@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Élégance Couture - Vêtements de Haute Couture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        .cart-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f5f5f5" width="1200" height="600"/><circle cx="100" cy="100" r="50" fill="%23d4af37" opacity="0.1"/><circle cx="1100" cy="500" r="80" fill="%23d4af37" opacity="0.1"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .btn-primary {
+            background: #d4af37;
+            color: #1a1a1a;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #e8c547;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .products {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: left;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #eee;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .product-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #d4af37;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .product-id {
+            font-size: 0.8rem;
+            color: #999;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-add {
+            width: 100%;
+            background: #1a1a1a;
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-add:hover {
+            background: #d4af37;
+            color: #1a1a1a;
+        }
+
+        .about {
+            background: #f9f9f9;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #d4af37;
+            text-transform: uppercase;
+        }
+
+        .footer-section p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+            margin: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #d4af37;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">✨ Élégance Couture</div>
+            <nav>
+                <a href="#products">Collections</a>
+                <a href="#about">À Propos</a>
+                <a href="#contact">Contact</a>
+                <a href="https://wa.me/221771234567" target="_blank" class="cart-icon" style="color: white; text-decoration: none;">💬 WhatsApp</a>
+            </nav>
+        </div>
+    </header>
+
+    <section style="background-image:url(produits/f1.jpg);" class="hero">
+        <h1>Découvrez l'Élégance Authentique</h1>
+        <p>Vêtements de couture sur mesure pour vous distinguer</p>
+        <button class="btn-primary">Voir la Collection</button>
+    </section>
+
+    <section class="products" id="products">
+        <h2 class="section-title">Nos Collections Exclusives</h2>
+        <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2>Qui Sommes-Nous?</h2>
+            <p>Élégance Couture est une maison de couture fondée en 2010, spécialisée dans la création de vêtements haut de gamme sur mesure. Nos couturiers passionnés combinent tradition et modernité pour créer des pièces uniques qui mettent en valeur votre personnalité.</p>
+            <p>Chaque création est réalisée avec les plus beaux tissus et un savoir-faire ancestral. Nous croyons que l'élégance véritable réside dans les détails et la qualité.</p>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">✂️</div>
+                <h3>Sur Mesure</h3>
+                <p>Chaque vêtement est taillé à vos mesures</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎨</div>
+                <h3>Création Personnalisée</h3>
+                <p>Concevez votre propre modèle</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🌟</div>
+                <h3>Matériaux Premium</h3>
+                <p>Seuls les meilleurs tissus du monde</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🚚</div>
+                <h3>Livraison Rapide</h3>
+                <p>Livraison assurée en 48h</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>📍 63rue Felix-Faure<br>Dakar plateau,Dakar</p>
+                <p>📞 +221 78 131 82 77</p>
+                <p>✉️ info@elegancecouture.fr</p>
+            </div>
+            <div class="footer-section">
+                <h4>Service Client</h4>
+                <a href="#">FAQ</a>
+                <a href="#">Livraison & Retours</a>
+                <a href="#">Conditions Générales</a>
+                <a href="#">Politique de Confidentialité</a>
+            </div>
+            <div class="footer-section">
+                <h4>Entreprise</h4>
+                <a href="#">À Propos</a>
+                <a href="#">Carrières</a>
+                <a href="#">Blog</a>
+                <a href="#">Presse</a>
+            </div>
+            <div class="footer-section">
+                <h4>Suivez-Nous</h4>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Pinterest</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Élégance Couture. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        const products = [
+            { id: 0, name: "Robe de Soirée Élégante", desc: "Robe longue en mousseline avec détails brodés", price: "350 € - 450 €" },
+            { id: 1, name: "Costume Taillé Sur Mesure", desc: "Costume trois pièces en laine fine italiana", price: "480 € - 600 €" },
+            { id: 2, name: "Blazer Premium", desc: "Blazer cintrée avec doublure en soie naturelle", price: "280 € - 350 €" },
+            { id: 3, name: "Robe Cocktail Chic", desc: "Robe courte avec encolure asymétrique", price: "220 € - 300 €" },
+            { id: 4, name: "Pantalon Haute Couture", desc: "Pantalon à pince en coton premium", price: "180 € - 250 €" },
+            { id: 5, name: "Collection Accessoires", desc: "Ceintures, écharpes et accessoires assortis", price: "60 € - 150 €" },
+            { id: 6, name: "Robe Mariée Luxe", desc: "Robe de mariage avec voile et perles", price: "800 € - 1200 €" },
+            { id: 7, name: "Veste Smoking", desc: "Veste smoking noir avec revers en soie", price: "550 € - 700 €" },
+            { id: 8, name: "Robe Empire", desc: "Robe empire en tulle délicat", price: "300 € - 400 €" },
+            { id: 9, name: "Pantalon Velours", desc: "Pantalon en velours côtelé premium", price: "200 € - 280 €" },
+            { id: 10, name: "Chemise Blanche Parfaite", desc: "Chemise blanche en coton égyptien", price: "120 € - 180 €" },
+            { id: 11, name: "Jupe Plissée Classique", desc: "Jupe plissée en laine vierge", price: "160 € - 220 €" },
+            { id: 12, name: "Cardigan Cachemire", desc: "Cardigan en pur cachemire", price: "380 € - 480 €" },
+            { id: 13, name: "Gilet Peau de Pêche", desc: "Gilet ajusté en peau de pêche", price: "140 € - 200 €" },
+            { id: 14, name: "Robe Midi Bohème", desc: "Robe midi avec détails floraux", price: "240 € - 320 €" },
+            { id: 15, name: "Costume Femme Chic", desc: "Costume tailleur en laine", price: "420 € - 550 €" },
+            { id: 16, name: "Manteau Long Élégant", desc: "Manteau long en feutre premium", price: "680 € - 850 €" },
+            { id: 17, name: "Robe Fourreau Sophistiquée", desc: "Robe fourreau noire intemporelle", price: "380 € - 480 €" },
+            { id: 18, name: "Pull Cachemire Noir", desc: "Pull en cachemire 100% pur", price: "320 € - 420 €" },
+            { id: 19, name: "Pantalon Blanc Immaculé", desc: "Pantalon blanc en laine fine", price: "200 € - 280 €" },
+            { id: 20, name: "Blazer Bleu Marine", desc: "Blazer classique bleu marine", price: "340 € - 450 €" },
+            { id: 21, name: "Robe Asymétrique Moderne", desc: "Robe asymétrique design contemporain", price: "400 € - 520 €" },
+            { id: 22, name: "Veste Oversize Tendance", desc: "Veste oversize en lin mélangé", price: "280 € - 380 €" },
+            { id: 23, name: "Pantalon Cigarette", desc: "Pantalon cigarette en coton bio", price: "160 € - 220 €" },
+            { id: 24, name: "Robe Plage Luxury", desc: "Robe de plage en lin et soie", price: "180 € - 260 €" },
+            { id: 25, name: "Manteau Camel Classique", desc: "Manteau camel intemporel", price: "720 € - 900 €" },
+            { id: 26, name: "Robe Peplum Chic", desc: "Robe peplum élégante", price: "280 € - 380 €" },
+            { id: 27, name: "Costume Gris Anthracite", desc: "Costume gris anthracite sur mesure", price: "500 € - 650 €" },
+            { id: 28, name: "Robe Dentelle Délicate", desc: "Robe en dentelle fine et raffinée", price: "350 € - 450 €" }
+        ];
+
+        function createProductCards() {
+            const grid = document.getElementById('productGrid');
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-image">
+                        <img src="produits/${product.id}.jpeg" alt="${product.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 300%22><rect fill=%22%23e0e0e0%22 width=%22300%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2224%22 fill=%22%23999%22>Produit ${product.id}</text></svg>'">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-id">Référence: ${product.id}</div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-desc">${product.desc}</div>
+                        <div class="product-price">${product.price}</div>
+                        <button class="btn-add" onclick="contactWhatsApp('${product.name}', '${product.id}')">Ajouter au Panier</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function contactWhatsApp(productName, productId) {
+            const message = `Bonjour, je suis intéressé par le produit: ${productName} (Référence: ${productId})`;
+            const whatsappUrl = `https://wa.me/221770368599?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Générer les cartes au chargement
+        document.addEventListener('DOMContentLoaded', createProductCards);
+    </script>
+</body>
+</html>
